@@ -1,0 +1,527 @@
+/* =====================================================================
+   sketch_ui · Formularios (add / change) "Hand-Drawn / Sketch UI"
+   Paleta --sketch-* de nav_sidebar.css (con fallbacks).
+   Todo va acotado a `body.change-form` para ganar a forms.css,
+   base.css y theme.css sin usar !important.
+   Nota: estilo base de orden/estructura; los campos se afinan después.
+   ===================================================================== */
+
+body.change-form {
+  --fm-ink: var(--sketch-ink, #2d2d2d);
+  --fm-paper: var(--sketch-paper, #fdfbf7);
+  --fm-muted: var(--sketch-muted, #6b6b6b);
+  --fm-accent: var(--sketch-accent, #ff4d4d);
+  --fm-blue: var(--sketch-blue, #2d5da1);
+  --fm-hl: var(--sketch-highlight, #fff59d);
+  --fm-wobble-a: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --fm-wobble-b: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  --fm-wobble-c: 95px 8px 105px 10px / 10px 100px 8px 95px;
+
+  font-family: "Patrick Hand", "Kalam", "Comic Sans MS", cursive;
+  color: var(--fm-ink);
+}
+
+/* ---------- Título ---------- */
+body.change-form #content .titles h1 {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 0 6px;
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--fm-ink);
+  background: linear-gradient(transparent 62%, var(--fm-hl) 62%);
+}
+
+/* ---------- Botones de la cabecera (History, View on site) ---------- */
+body.change-form .object-tools a:link,
+body.change-form .object-tools a:visited {
+  padding: 5px 16px;
+  font-family: "Kalam", cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--fm-ink);
+  background: var(--fm-hl);
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-a);
+  box-shadow: 3px 3px 0 0 var(--fm-ink);
+  filter: none;
+  transform: rotate(1deg);
+  transition: transform .1s, box-shadow .1s, background .12s, color .12s;
+}
+body.change-form .object-tools a:hover,
+body.change-form .object-tools a:focus-visible {
+  color: #fff;
+  background: var(--fm-accent);
+  transform: translate(2px, 2px) rotate(-1deg);
+  box-shadow: 1px 1px 0 0 var(--fm-ink);
+  filter: none;
+  outline: 0;
+}
+
+/* ---------- Fieldsets como tarjetas de papel ---------- */
+body.change-form #content-main form .module,
+body.change-form #content-main form fieldset.module {
+  margin: 0 0 32px;
+  padding: 0 0 8px;
+  overflow: hidden;
+  background: var(--fm-paper);
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-b);
+  box-shadow: 3px 3px 0 0 var(--fm-ink);
+  color: var(--fm-ink);
+}
+body.change-form #content-main form .module > h2,
+body.change-form #content-main form .module .fieldset-heading,
+body.change-form #content-main form .module summary {
+  margin: 0;
+  padding: 12px 28px;
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--fm-ink);
+  background: transparent;
+  border-bottom: 2px dashed var(--fm-ink);
+}
+body.change-form #content-main form .module .description {
+  margin: 0;
+  padding: 16px 28px 0;
+  color: var(--fm-muted);
+}
+
+/* ---------- Filas ---------- */
+body.change-form #content-main form .form-row {
+  padding: 20px 28px;
+  border-bottom: 1px dashed var(--fm-muted);
+}
+/* Más aire entre etiqueta, campo y texto de ayuda */
+body.change-form #content-main form .form-row > div { gap: 10px 16px; }
+body.change-form #content-main form .form-row .help,
+body.change-form #content-main form .form-row .helptext,
+body.change-form #content-main form .form-row p.help { margin-top: 10px; line-height: 1.45; }
+body.change-form #content-main form .form-row ul.errorlist { margin-bottom: 12px; }
+body.change-form #content-main form .form-row .related-widget-wrapper { gap: 10px; }
+body.change-form #content-main form .form-row:last-child { border-bottom: 0; }
+body.change-form #content-main form .form-row.hidden { display: none; }
+
+body.change-form #content-main form label {
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fm-ink);
+}
+body.change-form #content-main form label.required::after {
+  content: " *";
+  color: var(--fm-accent);
+}
+body.change-form #content-main form .checkbox-row label,
+body.change-form #content-main form label.vCheckboxLabel { font-weight: 400; }
+
+/* ---------- Campos (estilo base, sin perfeccionar) ---------- */
+body.change-form #content-main form input[type="text"],
+body.change-form #content-main form input[type="password"],
+body.change-form #content-main form input[type="email"],
+body.change-form #content-main form input[type="url"],
+body.change-form #content-main form input[type="number"],
+body.change-form #content-main form input[type="date"],
+body.change-form #content-main form input[type="time"],
+body.change-form #content-main form textarea,
+body.change-form #content-main form select {
+  box-sizing: border-box;
+  max-width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--fm-ink);
+  background: var(--fm-paper);
+  border: 2px solid var(--fm-ink);
+  border-radius: 10px 8px 12px 8px / 8px 12px 8px 10px;
+}
+body.change-form #content-main form input:focus,
+body.change-form #content-main form textarea:focus,
+body.change-form #content-main form select:focus {
+  outline: 0;
+  border-color: var(--fm-blue);
+  box-shadow: 3px 3px 0 0 var(--fm-blue);
+}
+body.change-form #content-main form input[type="checkbox"],
+body.change-form #content-main form input[type="radio"] { accent-color: var(--fm-ink); }
+
+/* ---------- Ayudas y errores ---------- */
+body.change-form #content-main form .help,
+body.change-form #content-main form .help-tooltip,
+body.change-form #content-main form p.help {
+  color: var(--fm-muted);
+  font-size: .9rem;
+}
+body.change-form #content-main form .errornote,
+body.change-form #content-main form ul.errorlist {
+  font-family: inherit;
+  color: #fff;
+  background: var(--fm-accent);
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-c);
+}
+body.change-form #content-main form .errornote { margin: 0 0 16px; padding: 10px 16px; }
+body.change-form #content-main form ul.errorlist { padding: 6px 12px; margin: 0 0 8px; }
+body.change-form #content-main form ul.errorlist li { background: none; padding: 0; }
+body.change-form #content-main form .form-row.errors { background: rgba(255, 77, 77, .08); }
+
+/* ---------- Inlines ---------- */
+body.change-form #content-main form .inline-group {
+  margin: 0 0 32px;
+  overflow: hidden;
+  background: var(--fm-paper);
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-b);
+  box-shadow: 3px 3px 0 0 var(--fm-ink);
+}
+body.change-form #content-main form .inline-group .tabular thead th {
+  font-family: "Kalam", cursive;
+  color: var(--fm-ink);
+  background: transparent;
+  border-bottom: 2px solid var(--fm-ink);
+}
+body.change-form #content-main form .inline-group td { border-bottom: 1px dashed var(--fm-muted); }
+body.change-form #content-main form .inline-group .module { box-shadow: none; border: 0; margin: 0; border-radius: 0; }
+
+/* ---------- Barra de guardado (pegatinas) ---------- */
+body.change-form .submit-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  background: var(--fm-paper);
+  border: 2px dashed var(--fm-ink);
+  border-radius: var(--fm-wobble-a);
+  box-shadow: none;
+}
+body.change-form .submit-row input[type="submit"],
+body.change-form .submit-row a.button,
+body.change-form .submit-row .deletelink {
+  margin: 0;
+  padding: 6px 16px;
+  height: auto;
+  line-height: 1.3;
+  font-family: "Kalam", cursive;
+  font-size: .95rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--fm-ink);
+  background: var(--fm-paper);
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-c);
+  box-shadow: 2px 2px 0 0 var(--fm-ink);
+  filter: none;
+  cursor: pointer;
+  transition: transform .1s, box-shadow .1s, background .12s, color .12s;
+}
+body.change-form .submit-row input[type="submit"].default { background: var(--fm-hl); }
+body.change-form .submit-row input[type="submit"]:hover,
+body.change-form .submit-row input[type="submit"]:focus-visible,
+body.change-form .submit-row a.button:hover {
+  background: var(--fm-hl);
+  color: var(--fm-ink);
+  transform: translate(1px, 1px) rotate(-1deg);
+  box-shadow: 1px 1px 0 0 var(--fm-ink);
+  outline: 0;
+}
+/* "Delete" a la derecha y en rojo marcador */
+body.change-form .submit-row .deletelink-box { margin-left: auto; float: none; }
+body.change-form .submit-row a.deletelink:link,
+body.change-form .submit-row a.deletelink:visited { display: inline-block; color: var(--fm-accent); border-color: var(--fm-accent); box-shadow: 2px 2px 0 0 var(--fm-accent); }
+body.change-form .submit-row a.deletelink:hover { color: #fff; background: var(--fm-accent); box-shadow: 1px 1px 0 0 var(--fm-ink); }
+
+/* =====================================================================
+   Refinamiento de campos y widgets
+   ===================================================================== */
+
+/* ---------- Campos: fuente manuscrita también dentro de widgets ---------- */
+body.change-form #content-main form input[type="text"],
+body.change-form #content-main form input[type="password"],
+body.change-form #content-main form input[type="email"],
+body.change-form #content-main form input[type="url"],
+body.change-form #content-main form input[type="number"],
+body.change-form #content-main form input[type="date"],
+body.change-form #content-main form input[type="time"],
+body.change-form #content-main form textarea,
+body.change-form #content-main form select {
+  font-family: "Patrick Hand", "Kalam", "Comic Sans MS", cursive;
+  font-size: 1.05rem;
+  padding: 6px 12px;
+}
+body.change-form #content-main form select { padding: 5px 10px; }
+body.change-form #content-main form input::placeholder,
+body.change-form #content-main form textarea::placeholder { color: var(--fm-muted); font-style: italic; }
+body.change-form #content-main form input.vTextField,
+body.change-form #content-main form input.vURLField,
+body.change-form #content-main form input.vEmailField { width: min(100%, 22rem); }
+body.change-form #content-main form textarea { min-height: 5rem; border-radius: 12px 8px 14px 8px / 8px 14px 8px 12px; }
+
+/* ---------- Checkbox / radio más grandes y legibles ---------- */
+body.change-form #content-main form input[type="checkbox"],
+body.change-form #content-main form input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0 6px 0 0;
+  vertical-align: middle;
+  accent-color: var(--fm-accent);
+  cursor: pointer;
+}
+body.change-form #content-main form .checkbox-row { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; }
+body.change-form #content-main form .checkbox-row label { font-size: 1.05rem; }
+
+/* ---------- Etiquetas alineadas (solo escritorio) ---------- */
+@media (min-width: 768px) {
+  body.change-form #content-main form .aligned label {
+    /* Django apila label/ayuda/campo en columna: un flex-basis fijo se aplicaba como ALTO (176px) */
+    flex: 0 0 auto;
+    width: auto;
+    padding-top: 0;
+  }
+  body.change-form #content-main form .aligned .checkbox-row label { flex: 0 1 auto; width: auto; padding-top: 0; }
+}
+
+/* ---------- Campos de solo lectura ---------- */
+body.change-form #content-main form .form-row .readonly {
+  padding: 6px 0;
+  font-size: 1.05rem;
+  color: var(--fm-ink);
+}
+body.change-form #content-main form .form-row a:link,
+body.change-form #content-main form .form-row a:visited { color: var(--fm-blue); text-decoration: underline wavy var(--fm-blue); text-underline-offset: 3px; }
+body.change-form #content-main form .form-row a:hover { color: var(--fm-accent); text-decoration-color: var(--fm-accent); }
+/* Enlaces con aspecto de botón dentro de una fila (p. ej. "Reset password") */
+body.change-form #content-main form .form-row a.button:link,
+body.change-form #content-main form .form-row a.button:visited {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 4px 16px;
+  font-family: "Kalam", cursive;
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--fm-ink);
+  text-decoration: none;
+  background: var(--fm-paper);
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-c);
+  box-shadow: 2px 2px 0 0 var(--fm-ink);
+  transition: transform .1s, box-shadow .1s, background .12s;
+}
+body.change-form #content-main form .form-row a.button:hover,
+body.change-form #content-main form .form-row a.button:focus-visible {
+  color: var(--fm-ink);
+  background: var(--fm-hl);
+  transform: translate(1px, 1px) rotate(-1deg);
+  box-shadow: 1px 1px 0 0 var(--fm-ink);
+  outline: 0;
+}
+
+/* ---------- Widget de selección doble (filter_horizontal / vertical) ---------- */
+body.change-form #content-main form .selector { gap: 18px; align-items: stretch; width: 100%; }
+body.change-form #content-main form .selector-available,
+body.change-form #content-main form .selector-chosen {
+  padding-bottom: 8px;
+  background: var(--fm-paper);
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-b);
+  box-shadow: 3px 3px 0 0 var(--fm-ink);
+  overflow: visible;
+}
+body.change-form #content-main form .selector-available-title,
+body.change-form #content-main form .selector-chosen-title {
+  padding: 6px 12px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px dashed var(--fm-ink);
+}
+body.change-form #content-main form .selector-available-title label,
+body.change-form #content-main form .selector-chosen-title label {
+  font-family: "Kalam", cursive;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--fm-ink);
+}
+body.change-form #content-main form .selector .helptext { margin: 2px 0 0; color: var(--fm-muted); font-size: .9rem; font-weight: 400; }
+body.change-form #content-main form .selector-filter {
+  margin: 8px 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+body.change-form #content-main form .selector-filter input { flex: 1 1 auto; width: auto; min-width: 0; }
+body.change-form #content-main form .selector select.filtered {
+  display: block;
+  width: calc(100% - 20px);
+  margin: 0 10px;
+  padding: 4px;
+  border-radius: 12px 8px 14px 8px / 8px 14px 8px 12px;
+}
+body.change-form #content-main form .selector select.filtered option { padding: 3px 8px; border-radius: 6px; }
+body.change-form #content-main form .selector select.filtered option:checked {
+  color: var(--fm-ink);
+  background: var(--fm-hl) linear-gradient(0deg, var(--fm-hl), var(--fm-hl));
+}
+body.change-form #content-main form .selector .list-footer-display { margin: 4px 10px 0; color: var(--fm-muted); font-size: .9rem; }
+
+/* Botones "Choose all / Remove all": pegatinas */
+body.change-form #content-main form .selector-chooseall,
+body.change-form #content-main form .selector-clearall {
+  margin: 8px 10px 0;
+  padding: 3px 12px;
+  font-family: "Kalam", cursive;
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--fm-ink);
+  background-color: var(--fm-paper);
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-c);
+  box-shadow: 2px 2px 0 0 var(--fm-ink);
+  cursor: pointer;
+  transition: transform .1s, box-shadow .1s, background-color .12s;
+}
+/* Botones de flecha (add / remove): conservan el icono SVG de Django */
+body.change-form #content-main form .selector-add,
+body.change-form #content-main form .selector-remove {
+  background-color: var(--fm-paper);
+  border: 2px solid var(--fm-ink);
+  border-radius: 50% 45% 55% 48% / 48% 55% 45% 50%;
+  box-shadow: 2px 2px 0 0 var(--fm-ink);
+  cursor: pointer;
+  transition: transform .1s, box-shadow .1s, background-color .12s;
+}
+body.change-form #content-main form .selector-chooseall:hover,
+body.change-form #content-main form .selector-clearall:hover,
+body.change-form #content-main form .selector-add:hover,
+body.change-form #content-main form .selector-remove:hover,
+body.change-form #content-main form .selector-chooseall:focus-visible,
+body.change-form #content-main form .selector-clearall:focus-visible,
+body.change-form #content-main form .selector-add:focus-visible,
+body.change-form #content-main form .selector-remove:focus-visible {
+  background-color: var(--fm-hl);
+  transform: translate(1px, 1px) rotate(-2deg);
+  box-shadow: 1px 1px 0 0 var(--fm-ink);
+  outline: 0;
+}
+body.change-form #content-main form .selector button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+/* ---------- Fecha y hora: atajos y botones calendario / reloj ---------- */
+body.change-form #content-main form .datetime { color: var(--fm-muted); font-size: .95rem; }
+body.change-form #content-main form .datetimeshortcuts { margin-left: 6px; color: var(--fm-muted); }
+body.change-form #content-main form .datetimeshortcuts a:link,
+body.change-form #content-main form .datetimeshortcuts a:visited {
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  color: var(--fm-blue);
+}
+body.change-form #content-main form .datetimeshortcuts button {
+  padding: 2px 5px;
+  vertical-align: middle;
+  background-color: var(--fm-paper);
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-c);
+  box-shadow: 2px 2px 0 0 var(--fm-ink);
+  cursor: pointer;
+}
+body.change-form #content-main form .datetimeshortcuts button:hover,
+body.change-form #content-main form .datetimeshortcuts button:focus-visible { background-color: var(--fm-hl); outline: 0; }
+
+/* ---------- Calendario y reloj emergentes (fuera del <form>) ---------- */
+body.change-form .calendarbox,
+body.change-form .clockbox {
+  overflow: visible;
+  color: var(--fm-ink);
+  background: var(--fm-paper);
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-b);
+  box-shadow: 4px 4px 0 0 var(--fm-ink);
+  font-family: "Patrick Hand", "Kalam", cursive;
+}
+body.change-form .calendarbox h2,
+body.change-form .clockbox h2,
+body.change-form .calendar caption {
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--fm-ink);
+  background: transparent;
+  border-bottom: 2px dashed var(--fm-ink);
+}
+body.change-form .calendar th { color: var(--fm-muted); background: transparent; font-family: "Kalam", cursive; }
+body.change-form .calendar td { background: transparent; border: 0; }
+body.change-form .calendar td a,
+body.change-form .timelist a {
+  color: var(--fm-ink);
+  background: transparent;
+  border-radius: var(--fm-wobble-c);
+}
+body.change-form .calendar td a:hover,
+body.change-form .calendar td.selected a,
+body.change-form .timelist a:hover { color: var(--fm-ink); background: var(--fm-hl); }
+body.change-form .calendar td.today a { font-weight: 700; text-decoration: underline wavy var(--fm-accent); text-underline-offset: 3px; }
+body.change-form .calendar-shortcuts,
+body.change-form .calendar-cancel { background: transparent; border-top: 2px dashed var(--fm-ink); color: var(--fm-ink); }
+body.change-form .calendar-cancel a { color: var(--fm-blue); }
+
+/* ---------- Inlines: cabeceras y "Add another" (sin verificar con datos) ---------- */
+body.change-form #content-main form .inline-related h3 {
+  margin: 0;
+  padding: 6px 14px;
+  font-family: "Kalam", cursive;
+  color: var(--fm-ink);
+  background: transparent;
+  border-bottom: 2px dashed var(--fm-ink);
+}
+body.change-form #content-main form .add-row a:link,
+body.change-form #content-main form .add-row a:visited {
+  display: inline-block;
+  padding: 2px 14px;
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  color: var(--fm-ink);
+  background: var(--fm-hl) none;
+  border: 2px solid var(--fm-ink);
+  border-radius: var(--fm-wobble-c);
+  box-shadow: 2px 2px 0 0 var(--fm-ink);
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  body.change-form #content-main form .form-row { padding: 16px 16px; }
+  body.change-form #content-main form .selector { flex-direction: column; }
+  /* Django fija `width: calc(100vw - 30px)` aquí; con nuestro padding desborda la fila */
+  body.change-form #content-main form .aligned .form-row > div { width: auto; max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.change-form * { transition: none; }
+}
+
+/* Listas dentro de ayudas (p. ej. reglas de contraseña): Django las fija en 11px */
+body.change-form #content-main form .help ul,
+body.change-form #content-main form .helptext ul { margin: 6px 0 0; padding: 0 0 0 1.2em; }
+body.change-form #content-main form .help li,
+body.change-form #content-main form .helptext li {
+  font-size: inherit;
+  line-height: 1.5;
+  color: var(--fm-muted);
+}
+
+/* Django fija la fuente base (Inter) en ayudas, párrafos y campos de solo
+   lectura (p. ej. resumen del hash de contraseña); aquí hereda la del tema. */
+body.change-form #content-main form p,
+body.change-form #content-main form p *,
+body.change-form #content-main form .help,
+body.change-form #content-main form .help *,
+body.change-form #content-main form .helptext,
+body.change-form #content-main form .readonly,
+body.change-form #content-main form .readonly * { font-family: inherit; }

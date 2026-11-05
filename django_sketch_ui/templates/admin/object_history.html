@@ -1,0 +1,3 @@
+{% extends "admin/object_history.html" %}
+{# Solo añade una clase al <body>; Django no define ninguna en esta vista. #}
+{% block bodyclass %}{{ block.super }} object-history{% endblock %}

@@ -1,0 +1,30 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Archivos de compilación y empaquetado de Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Configuración del editor o IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Base de datos de prueba local (por si usas SQLite en tu desarrollo)
+db.sqlite3
+
+# Archivos del sistema operativo
+Thumbs.db
+Desktop.ini
+.DS_Store

@@ -1,0 +1,160 @@
+/* =====================================================================
+   sketch_ui · Header "Hand-Drawn / Sketch UI"
+   Comparte la paleta (--sketch-*) definida en nav_sidebar.css; los
+   fallbacks permiten que este archivo funcione solo.
+   Selectores `header#header` para ganar a base.css y a theme.css.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap");
+
+header#header {
+  position: relative;
+  padding: 12px 32px 14px;
+  font-family: "Patrick Hand", "Kalam", "Comic Sans MS", cursive;
+  color: var(--sketch-ink, #2d2d2d);
+  background-color: var(--sketch-paper, #fdfbf7);
+  background-image: radial-gradient(var(--sketch-dot, rgba(45,45,45,.16)) 1px, transparent 1px);
+  background-size: 18px 18px;
+  border-bottom: 3px solid var(--sketch-ink, #2d2d2d);
+  /* trazo irregular en el borde inferior */
+  border-radius: 0 0 var(--sketch-r-x, 18px) var(--sketch-r-y, 6px) / 0 0 8px 14px;
+  box-shadow: 0 4px 0 0 var(--sketch-ink, #2d2d2d);
+}
+
+/* ---------- Marca ---------- */
+header#header #site-name {
+  margin: 0;
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+header#header #site-name a:link,
+header#header #site-name a:visited {
+  display: inline-block;
+  padding: 2px 14px;
+  color: var(--sketch-ink, #2d2d2d);
+  text-decoration: none;
+  background: var(--sketch-highlight, #fff59d);
+  border: 2px solid var(--sketch-ink, #2d2d2d);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  box-shadow: 3px 3px 0 0 var(--sketch-ink, #2d2d2d);
+  transform: rotate(-1.2deg);
+  transition: transform .15s, box-shadow .15s;
+}
+header#header #site-name a:hover,
+header#header #site-name a:focus-visible {
+  text-decoration: none;
+  transform: rotate(.8deg) translateY(-1px);
+  box-shadow: 5px 5px 0 0 var(--sketch-accent, #ff4d4d);
+  outline: 0;
+}
+
+/* ---------- Herramientas de usuario ---------- */
+header#header #user-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px 10px;
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--sketch-ink, #2d2d2d);
+}
+header#header #user-tools strong {
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  padding: 0 4px;
+  background: linear-gradient(transparent 55%, var(--sketch-highlight, #fff59d) 55%);
+}
+
+/* Enlaces y botón de logout como "pegatinas" */
+header#header #user-tools a:link,
+header#header #user-tools a:visited,
+header#header #logout-form button {
+  display: inline-block;
+  padding: 2px 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--sketch-ink, #2d2d2d);
+  text-decoration: none;
+  background: var(--sketch-paper, #fdfbf7);
+  border: 2px solid var(--sketch-ink, #2d2d2d);
+  border-radius: 95px 8px 105px 10px / 10px 100px 8px 95px;
+  box-shadow: 2px 2px 0 0 var(--sketch-ink, #2d2d2d);
+  cursor: pointer;
+  transition: transform .1s, box-shadow .1s, background .12s, color .12s;
+}
+header#header #user-tools a:hover,
+header#header #user-tools a:focus-visible,
+header#header #logout-form button:hover,
+header#header #logout-form button:focus-visible {
+  background: var(--sketch-highlight, #fff59d);
+  color: var(--sketch-ink, #2d2d2d);
+  border-bottom: 2px solid var(--sketch-ink, #2d2d2d);
+  text-decoration: none;
+  transform: translate(1px, 1px) rotate(-1deg);
+  box-shadow: 1px 1px 0 0 var(--sketch-ink, #2d2d2d);
+  outline: 0;
+}
+/* Logout en rojo marcador */
+header#header #logout-form button:hover,
+header#header #logout-form button:focus-visible {
+  background: var(--sketch-accent, #ff4d4d);
+  color: #fff;
+}
+header#header #logout-form button:active { transform: translate(2px, 2px); box-shadow: 0 0 0 0; }
+
+/* ---------- Botón claro/oscuro ---------- */
+header#header .theme-toggle {
+  box-sizing: border-box;
+  overflow: hidden;   /* el rectángulo del icono no puede salirse del círculo */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  padding: 0;
+  color: var(--sketch-ink, #2d2d2d);
+  background: var(--sketch-paper, #fdfbf7);
+  border: 2px solid var(--sketch-ink, #2d2d2d);
+  border-radius: 50% 45% 55% 48% / 48% 55% 45% 50%;
+  box-shadow: 2px 2px 0 0 var(--sketch-ink, #2d2d2d);
+  cursor: pointer;
+  transition: transform .2s, background .12s;
+}
+header#header .theme-toggle:hover,
+header#header .theme-toggle:focus-visible {
+  background: var(--sketch-highlight, #fff59d);
+  transform: rotate(25deg);
+  outline: 0;
+}
+/* El rectángulo del icono debe seguir el fondo del botón también en hover */
+header#header .theme-toggle:hover svg,
+header#header .theme-toggle:focus-visible svg {
+  color: var(--sketch-highlight, #fff59d);
+}
+header#header .theme-toggle svg {
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  /* Django pinta un rectángulo con currentColor y recorta el glifo: color = fondo del botón, fill = glifo */
+  color: var(--sketch-paper, #fdfbf7);
+  fill: var(--sketch-ink, #2d2d2d);
+}
+
+@media (max-width: 767px) {
+  header#header { padding: 10px 16px 12px; flex-wrap: wrap; gap: 10px; }
+  header#header #user-tools { justify-content: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header#header *,
+  header#header { transition: none; }
+}

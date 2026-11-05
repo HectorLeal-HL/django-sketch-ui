@@ -1,0 +1,119 @@
+/* =====================================================================
+   sketch_ui · Mensajes del admin (django.contrib.messages)
+   "Hand-Drawn / Sketch UI". Aplican a cualquier página que muestre
+   <ul class="messagelist"> con li.success / .info / .warning / .error / .debug.
+   Sustituye los iconos SVG de Django por un glifo dibujado (::before)
+   y la caja pastel plana por una "nota" con borde y sombra.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap");
+
+:root {
+  --msg-ok: #3a9d5d;
+  --msg-warn: #f5c400;
+  --msg-info: var(--sketch-blue, #2d5da1);
+  --msg-error: var(--sketch-accent, #ff4d4d);
+  --msg-debug: var(--sketch-muted, #6b6b6b);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --msg-ok: #6fcf97; --msg-warn: #ffd84d; }
+}
+:root[data-theme="dark"] { --msg-ok: #6fcf97; --msg-warn: #ffd84d; }
+
+body ul.messagelist {
+  display: grid;
+  gap: 12px;
+  margin: 16px 32px;
+  padding: 0;
+  list-style: none;
+}
+
+body ul.messagelist li {
+  --msg-color: var(--msg-info);
+  position: relative;
+  display: block;          /* no flex: el texto y los enlaces deben fluir en línea */
+  min-height: 28px;
+  margin: 0;
+  padding: 12px 20px 12px 58px;
+  font-family: "Patrick Hand", "Kalam", "Comic Sans MS", cursive;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--sketch-ink, #2d2d2d);
+  word-break: break-word;
+  background: var(--sketch-paper, #fdfbf7) none;      /* quita color e icono de Django */
+  border: 2px solid var(--sketch-ink, #2d2d2d);
+  border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  box-shadow: 3px 3px 0 0 var(--sketch-ink, #2d2d2d);
+}
+/* Las reglas por tipo de Django (li.success, li.error…) fijan color e icono con
+   mayor especificidad: se anulan explícitamente para cada tipo. */
+body ul.messagelist li.debug,
+body ul.messagelist li.info,
+body ul.messagelist li.success,
+body ul.messagelist li.warning,
+body ul.messagelist li.error {
+  background-color: var(--sketch-paper, #fdfbf7);
+  background-image: none;
+}
+body ul.messagelist li:nth-child(odd)  { transform: rotate(-.3deg); }
+body ul.messagelist li:nth-child(even) { transform: rotate(.3deg); }
+
+/* Glifo: sello redondo irregular con el color del tipo de mensaje */
+body ul.messagelist li::before {
+  content: "i";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  margin-top: -14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-family: "Kalam", cursive;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: var(--msg-color);
+  border: 2px solid var(--sketch-ink, #2d2d2d);
+  border-radius: 50% 45% 55% 48% / 48% 55% 45% 50%;
+  box-shadow: 2px 2px 0 0 var(--sketch-ink, #2d2d2d);
+}
+
+body ul.messagelist li.success { --msg-color: var(--msg-ok); }
+body ul.messagelist li.success::before { content: "\2713"; }       /* ✓ */
+
+body ul.messagelist li.info { --msg-color: var(--msg-info); }
+body ul.messagelist li.info::before { content: "i"; }
+
+body ul.messagelist li.warning { --msg-color: var(--msg-warn); }
+body ul.messagelist li.warning::before { content: "!"; color: var(--sketch-ink, #2d2d2d); }
+
+body ul.messagelist li.error { --msg-color: var(--msg-error); }
+body ul.messagelist li.error::before { content: "\2715"; }         /* ✕ */
+
+body ul.messagelist li.debug { --msg-color: var(--msg-debug); }
+body ul.messagelist li.debug::before { content: "\2699"; }         /* ⚙ */
+
+/* Subrayado de resaltador con el color del tipo, en enlaces del mensaje */
+body ul.messagelist li a:link,
+body ul.messagelist li a:visited {
+  color: var(--sketch-ink, #2d2d2d);
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  text-decoration: underline wavy var(--msg-color);
+  text-underline-offset: 3px;
+}
+body ul.messagelist li a:hover { color: var(--sketch-accent, #ff4d4d); }
+
+@media (max-width: 767px) {
+  body ul.messagelist { margin: 12px 16px; }
+  body ul.messagelist li:nth-child(odd),
+  body ul.messagelist li:nth-child(even) { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body ul.messagelist li:nth-child(odd),
+  body ul.messagelist li:nth-child(even) { transform: none; }
+}

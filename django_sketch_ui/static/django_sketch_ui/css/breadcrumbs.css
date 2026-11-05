@@ -1,0 +1,83 @@
+/* =====================================================================
+   sketch_ui · Breadcrumbs "Hand-Drawn / Sketch UI"
+   Usa la paleta --sketch-* de nav_sidebar.css (con fallbacks).
+   Selector `ol.breadcrumbs` + `nav` para ganar a base.css y theme.css.
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap");
+
+nav > ol.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 4px;
+  margin: 0;
+  padding: 12px 32px;
+  list-style: none;
+  font-family: "Patrick Hand", "Kalam", "Comic Sans MS", cursive;
+  color: var(--sketch-muted, #6b6b6b);
+  background: var(--sketch-paper, #fdfbf7);
+  border: 0;
+  border-bottom: 2px dashed var(--sketch-ink, #2d2d2d);
+}
+
+nav > ol.breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  font-size: 1.05rem;
+}
+
+/* Separador: flechita dibujada a mano */
+nav > ol.breadcrumbs li:not([aria-current="page"])::after {
+  content: ">";
+  margin: 0 4px 0 8px;
+  font-size: .9rem;
+  color: var(--sketch-accent, #ff4d4d);
+  display: inline-block;
+  transform: rotate(-8deg);
+}
+
+/* Migas anteriores: "pegatinas" enlazadas */
+nav > ol.breadcrumbs a:link,
+nav > ol.breadcrumbs a:visited {
+  display: inline-block;
+  padding: 1px 10px;
+  color: var(--sketch-ink, #2d2d2d);
+  text-decoration: none;
+  background: var(--sketch-paper, #fdfbf7);
+  border: 2px solid var(--sketch-ink, #2d2d2d);
+  border-radius: 95px 8px 105px 10px / 10px 100px 8px 95px;
+  box-shadow: 2px 2px 0 0 var(--sketch-ink, #2d2d2d);
+  transition: transform .1s, box-shadow .1s, background .12s;
+}
+nav > ol.breadcrumbs a:hover,
+nav > ol.breadcrumbs a:focus-visible {
+  color: var(--sketch-ink, #2d2d2d);
+  background: var(--sketch-highlight, #fff59d);
+  transform: translate(1px, 1px) rotate(-1deg);
+  box-shadow: 1px 1px 0 0 var(--sketch-ink, #2d2d2d);
+  outline: 0;
+}
+
+/* Página actual: texto manuscrito con resaltador */
+nav > ol.breadcrumbs li[aria-current="page"] {
+  padding: 0 6px;
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-weight: 700;
+  color: var(--sketch-ink, #2d2d2d);
+  background: linear-gradient(transparent 55%, var(--sketch-highlight, #fff59d) 55%);
+}
+/* Migas "actuales" que son enlaces (p. ej. Users dentro de un objeto) */
+nav > ol.breadcrumbs li a[aria-current="page"] {
+  color: var(--sketch-ink, #2d2d2d);
+  background: var(--sketch-highlight, #fff59d);
+  cursor: default;
+}
+
+@media (max-width: 767px) {
+  nav > ol.breadcrumbs { padding: 10px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  nav > ol.breadcrumbs a { transition: none; }
+}

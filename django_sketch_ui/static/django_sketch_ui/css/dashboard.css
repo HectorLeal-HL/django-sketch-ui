@@ -1,0 +1,155 @@
+/* =====================================================================
+   sketch_ui · Dashboard (/admin/) "Hand-Drawn / Sketch UI"
+   Estiliza la columna lateral "Recent actions" (#content-related >
+   #recent-actions-module) y el título de la página. La lista de apps del
+   área principal se sigue ocultando desde theme.css (están en el sidebar).
+   Paleta --sketch-* de nav_sidebar.css (con fallbacks).
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap");
+
+/* ---------- Título (solo el dashboard principal, no las páginas de app) ---------- */
+body.dashboard:not([class*="app-"]) #content .titles h1 {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 0 6px;
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--sketch-ink, #2d2d2d);
+  background: linear-gradient(transparent 62%, var(--sketch-highlight, #fff59d) 62%);
+}
+
+/* ---------- Ancho: sin sidebar, el contenido usa todo el espacio ----------
+   Django fija `.dashboard #content { width: 600px }` (diseñado para ir junto a
+   un sidebar) y `.colMS { margin-right: 300px }` para la columna "Recent actions". */
+body.dashboard #content { width: auto; max-width: none; }
+/* Páginas de app (/admin/<app>/): no hay columna "Recent actions", se libera su hueco */
+body.dashboard[class*="app-"] #content { margin-right: 0; }
+
+/* ---------- Columna lateral: sin el fondo gris de Django ---------- */
+#content-related { background: transparent; }
+
+/* ---------- Tarjeta "Recent actions" ---------- */
+#content-related #recent-actions-module {
+  --ra-ink: var(--sketch-ink, #2d2d2d);
+  --ra-paper: var(--sketch-paper, #fdfbf7);
+  --ra-muted: var(--sketch-muted, #6b6b6b);
+  --ra-accent: var(--sketch-accent, #ff4d4d);
+  --ra-blue: var(--sketch-blue, #2d5da1);
+  --ra-hl: var(--sketch-highlight, #fff59d);
+  --ra-hover: var(--sketch-hover, #e5e0d8);
+  --ra-ok: var(--msg-ok, #3a9d5d);
+
+  margin: 0 0 24px;
+  padding: 0 0 10px;
+  overflow: visible;
+  font-family: "Patrick Hand", "Kalam", "Comic Sans MS", cursive;
+  color: var(--ra-ink);
+  background: var(--ra-paper);
+  border: 2px solid var(--ra-ink);
+  border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  box-shadow: 4px 4px 0 0 var(--ra-ink);
+  transform: rotate(.5deg);
+}
+
+#content-related #recent-actions-module h2 {
+  margin: 0;
+  padding: 10px 16px 8px;
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ra-ink);
+  background: transparent;
+  border-bottom: 2px dashed var(--ra-ink);
+}
+
+#content-related #recent-actions-module h3 {
+  display: inline-block;
+  margin: 14px 16px 10px;
+  padding: 0 4px;
+  font-family: "Kalam", cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ra-ink);
+  background: linear-gradient(transparent 55%, var(--ra-hl) 55%);
+}
+
+#content-related #recent-actions-module > p {
+  margin: 0;
+  padding: 0 16px 6px;
+  font-size: 1.05rem;
+  color: var(--ra-muted);
+}
+
+/* ---------- Lista de acciones ---------- */
+#content-related #recent-actions-module ul.actionlist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#content-related #recent-actions-module ul.actionlist li {
+  position: relative;
+  margin: 0;
+  padding: 7px 16px 7px 44px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  color: var(--ra-ink);
+  background: transparent none;            /* quita el icono SVG de Django */
+  border: 0;
+  border-bottom: 1.5px dashed var(--ra-muted);
+  transition: background .12s;
+}
+#content-related #recent-actions-module ul.actionlist li:last-child { border-bottom: 0; }
+#content-related #recent-actions-module ul.actionlist li:hover { background: var(--ra-hover); }
+
+/* Glifo por tipo de acción */
+#content-related #recent-actions-module ul.actionlist li::before {
+  content: "\270E";                         /* ✎ por defecto (change) */
+  position: absolute;
+  left: 16px;
+  top: 5px;
+  width: 20px;
+  text-align: center;
+  font-family: "Kalam", cursive;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ra-blue);
+}
+#content-related #recent-actions-module ul.actionlist li.addlink::before    { content: "+";      color: var(--ra-ok);     font-size: 1.4rem; top: 1px; }
+#content-related #recent-actions-module ul.actionlist li.changelink::before { content: "\270E";  color: var(--ra-blue); }
+#content-related #recent-actions-module ul.actionlist li.deletelink::before { content: "\2715";  color: var(--ra-accent); }
+
+/* Enlace al objeto */
+#content-related #recent-actions-module ul.actionlist li a:link,
+#content-related #recent-actions-module ul.actionlist li a:visited {
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  color: var(--ra-blue);
+  text-decoration: none;
+}
+#content-related #recent-actions-module ul.actionlist li a:hover,
+#content-related #recent-actions-module ul.actionlist li a:focus-visible {
+  text-decoration: underline wavy var(--ra-accent);
+  text-underline-offset: 3px;
+  outline: 0;
+}
+/* Tipo de contenido (línea pequeña) */
+#content-related #recent-actions-module ul.actionlist li .mini.quiet {
+  font-size: .9rem;
+  color: var(--ra-muted);
+}
+
+@media (max-width: 1024px) {
+  #content-related #recent-actions-module { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #content-related #recent-actions-module { transform: none; }
+  #content-related #recent-actions-module ul.actionlist li { transition: none; }
+}

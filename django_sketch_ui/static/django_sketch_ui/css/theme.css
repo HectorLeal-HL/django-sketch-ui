@@ -1,0 +1,155 @@
+/* ========== TIPOGRAFÍA ========== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --font-family-primary: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-family-monospace: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+body {
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.1rem; font-weight: 600; }
+
+/* ========== CABECERA ========== */
+/* El estilo de #header, #site-name, #user-tools y .breadcrumbs vive en
+   header.css y breadcrumbs.css (antes había aquí reglas que se pisaban). */
+
+/* ========== CONTENIDO ========== */
+#content { padding: 24px 32px; }
+
+/* ========== PANEL PRINCIPAL EN CUADRÍCULA ========== */
+.dashboard #content-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+.dashboard #content-main .module { margin: 0; }
+
+/* ========== TARJETAS / MÓDULOS ========== */
+.module {
+  border: 1px solid rgba(0, 0, 0, .08);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--body-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+}
+.module h2, .module caption, .inline-group h2 {
+  padding: 12px 16px;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* ========== TABLAS ========== */
+table { border-collapse: collapse; width: 100%; }
+thead th {
+  padding: 12px 14px;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+td, th { padding: 12px 14px; vertical-align: middle; }
+tbody tr { transition: background .15s; }
+
+/* ========== BARRA LATERAL ========== */
+#nav-sidebar .module th { font-size: .9rem; }
+
+/* ========== BOTONES ========== */
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button,
+.object-tools a {
+  font-family: inherit;
+  font-size: .9rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  transition: transform .1s, box-shadow .15s, filter .15s;
+}
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+a.button:hover,
+.object-tools a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .18);
+  filter: brightness(1.05);
+}
+
+/* Botón de eliminar */
+.submit-row a.deletelink,
+.submit-row .deletelink {
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+}
+
+/* Botones "Añadir" / "Historia" arriba a la derecha */
+.object-tools { margin-top: 0; }
+.object-tools a { border-radius: 8px; }
+
+/* ========== BARRA DE GUARDADO ========== */
+.submit-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 10px;
+  margin-top: 24px;
+}
+.submit-row p { margin: 0; }
+.submit-row .deletelink-box { margin-left: auto; }
+
+/* ========== FORMULARIOS ========== */
+input[type="text"], input[type="password"], input[type="email"],
+input[type="url"], input[type="number"], input[type="date"],
+input[type="time"], input[type="search"], textarea, select {
+  font-family: inherit;
+  font-size: .95rem;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--secondary, #3b82f6);
+  outline-offset: 1px;
+}
+.form-row { padding: 14px 16px; }
+.form-row label { font-weight: 600; font-size: .9rem; }
+.help { font-size: .8rem; margin-top: 4px; }
+
+fieldset.module { margin-bottom: 20px; }
+
+/* ========== LISTADOS ========== */
+#changelist-search #searchbar { width: 320px; }
+#changelist-filter {
+  border-radius: 10px;
+  overflow: hidden;
+}
+#changelist-filter h3 { font-size: .85rem; font-weight: 600; }
+.paginator { padding: 14px 16px; font-size: .9rem; }
+
+/* ========== MENSAJES ========== */
+ul.messagelist li {
+  padding: 12px 20px 12px 65px; /* 65px = espacio del icono (igual que base.css de Django) */
+  font-size: .9rem;
+  border-radius: 8px;
+  margin: 12px 32px;
+}
+
+/* La lista de apps del dashboard (/admin/) y de cada página de app se muestra
+   en el panel principal; su estilo sketch está en app_index.css.
+   (Antes se ocultaba aquí porque ya están en el sidebar; ver errores.md.) */

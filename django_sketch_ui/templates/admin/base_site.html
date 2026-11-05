@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/theme.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/nav_sidebar.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/header.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/breadcrumbs.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/changelist.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/app_index.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/forms.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/history.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/auth.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/messages.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/dashboard.css' %}">
+  <link rel="stylesheet" href="{% static 'django_sketch_ui/css/delete.css' %}">
+{% endblock %}

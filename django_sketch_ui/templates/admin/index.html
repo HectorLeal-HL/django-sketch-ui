@@ -1,0 +1,9 @@
+{% extends "admin/index.html" %}
+
+{# Django deja vacío este bloque en index.html (el dashboard no lleva sidebar).      #}
+{# admin/app_index.html extiende este template, así que aquí se decide por vista:   #}
+{#  - Dashboard (/admin/): SIN navbar; las apps se muestran en el área principal.   #}
+{#  - Página de una app (/admin/<app>/): CON navbar (solo ella define `app_label`). #}
+{% block nav-sidebar %}
+  {% if app_label %}{% include "admin/nav_sidebar.html" %}{% endif %}
+{% endblock %}

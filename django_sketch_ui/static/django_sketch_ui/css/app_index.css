@@ -1,0 +1,161 @@
+/* =====================================================================
+   sketch_ui · Panel de cada app (app_index) "Hand-Drawn / Sketch UI"
+   Aplica a /admin/<app>/ (y, si se mostrara, al dashboard): listas de
+   modelos con enlaces Add / Change. Acotado a `body.dashboard`.
+   Usa la paleta --sketch-* de nav_sidebar.css (con fallbacks).
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap");
+
+body.dashboard {
+  --ai-ink: var(--sketch-ink, #2d2d2d);
+  --ai-paper: var(--sketch-paper, #fdfbf7);
+  --ai-muted: var(--sketch-muted, #6b6b6b);
+  --ai-accent: var(--sketch-accent, #ff4d4d);
+  --ai-blue: var(--sketch-blue, #2d5da1);
+  --ai-hl: var(--sketch-highlight, #fff59d);
+  --ai-hover: var(--sketch-hover, #e5e0d8);
+  --ai-wobble-a: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --ai-wobble-b: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  --ai-wobble-c: 95px 8px 105px 10px / 10px 100px 8px 95px;
+
+  font-family: "Patrick Hand", "Kalam", "Comic Sans MS", cursive;
+  color: var(--ai-ink);
+}
+
+/* ---------- Título ---------- */
+body.dashboard #content .titles h1 {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 0 6px;
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--ai-ink);
+  background: linear-gradient(transparent 62%, var(--ai-hl) 62%);
+}
+
+/* ---------- Tarjeta de la app ---------- */
+body.dashboard #content-main .module {
+  overflow: visible;
+  margin: 0 0 24px;
+  background: var(--ai-paper);
+  border: 2px solid var(--ai-ink);
+  border-radius: var(--ai-wobble-b);
+  box-shadow: 4px 4px 0 0 var(--ai-ink);
+}
+body.dashboard #content-main .module table { width: 100%; border-collapse: collapse; background: transparent; }
+
+body.dashboard #content-main .module caption {
+  padding: 8px 16px 6px;
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  text-align: left;
+  color: var(--ai-ink);
+  background: transparent;
+  border-bottom: 2px dashed var(--ai-ink);
+}
+body.dashboard #content-main .module caption a.section:link,
+body.dashboard #content-main .module caption a.section:visited {
+  padding: 0 4px;
+  color: var(--ai-ink);
+  text-decoration: none;
+  background: linear-gradient(transparent 55%, var(--ai-hl) 55%);
+}
+body.dashboard #content-main .module caption a.section:hover { text-decoration: underline wavy var(--ai-accent); text-underline-offset: 4px; }
+
+/* ---------- Filas de modelos ---------- */
+body.dashboard #content-main .module tr { background: transparent; transition: background .12s; }
+body.dashboard #content-main .module tr:hover { background: var(--ai-hover); }
+body.dashboard #content-main .module th,
+body.dashboard #content-main .module td {
+  padding: 8px 12px;
+  font-size: 1.1rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px dashed var(--ai-muted);
+  vertical-align: middle;
+}
+body.dashboard #content-main .module tr:last-child th,
+body.dashboard #content-main .module tr:last-child td { border-bottom: 0; }
+body.dashboard #content-main .module th { padding-left: 16px; font-weight: 400; text-align: left; }
+[dir="rtl"] body.dashboard #content-main .module th { padding-left: 12px; padding-right: 16px; text-align: right; }
+
+body.dashboard #content-main .module th a:link,
+body.dashboard #content-main .module th a:visited {
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  color: var(--ai-blue);
+  text-decoration: none;
+}
+body.dashboard #content-main .module th a::before {
+  content: "\2736"; /* ✶ */
+  display: inline-block;
+  margin-right: 8px;
+  font-size: .75em;
+  color: var(--ai-muted);
+  transition: transform .2s, color .2s;
+}
+body.dashboard #content-main .module tr:hover th a::before { color: var(--ai-accent); transform: rotate(72deg) scale(1.2); }
+body.dashboard #content-main .module th a:hover,
+body.dashboard #content-main .module th a:focus-visible {
+  text-decoration: underline wavy var(--ai-accent);
+  text-underline-offset: 4px;
+}
+
+/* ---------- Enlaces Add / Change / View: pegatinas ---------- */
+body.dashboard #content-main .module td { width: 1%; white-space: nowrap; }
+body.dashboard #content-main .module td a.addlink,
+body.dashboard #content-main .module td a.changelink,
+body.dashboard #content-main .module td a.viewlink {
+  display: inline-block;
+  padding: 1px 12px;
+  font-family: "Kalam", cursive;
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--ai-ink);
+  text-decoration: none;
+  background: var(--ai-paper) none;      /* quita el icono SVG de Django */
+  border: 2px solid var(--ai-ink);
+  border-radius: var(--ai-wobble-c);
+  box-shadow: 2px 2px 0 0 var(--ai-ink);
+  transition: transform .1s, box-shadow .1s, background .12s, color .12s;
+}
+body.dashboard #content-main .module td a.addlink { background: var(--ai-hl) none; }
+body.dashboard #content-main .module td a.addlink::before { content: "+ "; }
+body.dashboard #content-main .module td a.addlink:hover,
+body.dashboard #content-main .module td a.addlink:focus-visible {
+  color: #fff;
+  background: var(--ai-accent) none;
+  transform: translate(1px, 1px) rotate(-2deg);
+  box-shadow: 1px 1px 0 0 var(--ai-ink);
+  outline: 0;
+}
+body.dashboard #content-main .module td a.changelink:hover,
+body.dashboard #content-main .module td a.viewlink:hover,
+body.dashboard #content-main .module td a.changelink:focus-visible,
+body.dashboard #content-main .module td a.viewlink:focus-visible {
+  background: var(--ai-hl) none;
+  transform: translate(1px, 1px) rotate(-2deg);
+  box-shadow: 1px 1px 0 0 var(--ai-ink);
+  outline: 0;
+}
+
+/* ---------- Mensaje sin permisos ---------- */
+body.dashboard #content-main > p {
+  padding: 10px 16px;
+  font-size: 1.1rem;
+  background: var(--ai-paper);
+  border: 2px dashed var(--ai-ink);
+  border-radius: var(--ai-wobble-a);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.dashboard #content-main .module tr,
+  body.dashboard #content-main .module th a::before,
+  body.dashboard #content-main .module td a { transition: none; }
+}

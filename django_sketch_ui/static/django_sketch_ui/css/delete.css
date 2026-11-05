@@ -1,0 +1,229 @@
+/* =====================================================================
+   sketch_ui · Confirmación de borrado "Hand-Drawn / Sketch UI"
+   - "Delete multiple objects" (acción "Delete selected …")  → body.delete-selected-confirmation
+   - "Delete" de un objeto                                    → body.delete-confirmation
+   Ambos templates ponen .delete-confirmation en el <body>; el múltiple añade
+   .delete-selected-confirmation. Esta vista NO tiene #content-main: el
+   contenido (p, h2, ul, form) cuelga directamente de #content.
+   Paleta --sketch-* de nav_sidebar.css (con fallbacks).
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap");
+
+body.delete-confirmation {
+  --dl-ink: var(--sketch-ink, #2d2d2d);
+  --dl-paper: var(--sketch-paper, #fdfbf7);
+  --dl-muted: var(--sketch-muted, #6b6b6b);
+  --dl-accent: var(--sketch-accent, #ff4d4d);
+  --dl-blue: var(--sketch-blue, #2d5da1);
+  --dl-hl: var(--sketch-highlight, #fff59d);
+  --dl-hover: var(--sketch-hover, #e5e0d8);
+  --dl-wobble-a: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --dl-wobble-b: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  --dl-wobble-c: 95px 8px 105px 10px / 10px 100px 8px 95px;
+
+  font-family: "Patrick Hand", "Kalam", "Comic Sans MS", cursive;
+  color: var(--dl-ink);
+}
+
+/* ---------- Título ---------- */
+body.delete-confirmation #content .titles h1 {
+  display: inline-block;
+  margin: 0 0 20px;
+  padding: 0 6px;
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--dl-ink);
+  background: linear-gradient(transparent 62%, var(--dl-hl) 62%);
+}
+
+/* ---------- Aviso principal (primer párrafo) ----------
+   "Are you sure you want to delete…?" / "…would require deleting protected objects" */
+body.delete-confirmation #content > p {
+  max-width: 52rem;
+  margin: 0 0 22px;
+  padding: 14px 20px 14px 56px;
+  position: relative;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--dl-ink);
+  background: var(--dl-paper);
+  border: 2px solid var(--dl-ink);
+  border-radius: var(--dl-wobble-b);
+  box-shadow: 3px 3px 0 0 var(--dl-ink);
+}
+body.delete-confirmation #content > p::before {
+  content: "!";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  margin-top: -15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-family: "Kalam", cursive;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: var(--dl-accent);
+  border: 2px solid var(--dl-ink);
+  border-radius: 50% 45% 55% 48% / 48% 55% 45% 50%;
+  box-shadow: 2px 2px 0 0 var(--dl-ink);
+}
+
+/* ---------- Encabezados "Summary" / "Objects" ---------- */
+body.delete-confirmation #content > h2 {
+  display: block;
+  margin: 26px 0 10px;
+  padding: 0;
+  font-family: "Kalam", "Patrick Hand", cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--dl-ink);
+  background: none;
+}
+body.delete-confirmation #content > h2::after {
+  content: "";
+  display: block;
+  width: 5.5rem;
+  height: 10px;
+  margin-top: -2px;
+  background: linear-gradient(transparent 55%, var(--dl-hl) 55%);
+}
+
+/* ---------- Listas: tarjetas de papel ---------- */
+body.delete-confirmation #content > ul {
+  max-width: 52rem;
+  margin: 0 0 8px;
+  padding: 14px 22px 14px 40px;
+  list-style: none;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--dl-ink);
+  background: var(--dl-paper);
+  border: 2px solid var(--dl-ink);
+  border-radius: var(--dl-wobble-a);
+  box-shadow: 3px 3px 0 0 var(--dl-ink);
+}
+body.delete-confirmation #content > ul li {
+  position: relative;
+  margin: 0;
+  padding: 3px 0;
+  list-style: none;
+  font-size: inherit;             /* base.css fija li en .8125rem */
+  color: var(--dl-ink);
+  background: none;
+}
+/* Viñeta dibujada a mano */
+body.delete-confirmation #content > ul li::before {
+  content: "\2736";               /* ✶ */
+  position: absolute;
+  left: -22px;
+  top: 5px;
+  font-size: .75em;
+  color: var(--dl-muted);
+}
+/* Listas anidadas (objetos relacionados): sangría con trazo discontinuo */
+body.delete-confirmation #content > ul ul {
+  margin: 4px 0 4px 6px;
+  padding: 0 0 0 26px;
+  list-style: none;
+  border-left: 2px dashed var(--dl-muted);
+}
+body.delete-confirmation #content > ul ul li::before { content: "\2013"; left: -18px; top: 2px; font-size: 1em; }
+
+/* Enlaces a los objetos */
+body.delete-confirmation #content > ul a:link,
+body.delete-confirmation #content > ul a:visited {
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  color: var(--dl-blue);
+  text-decoration: none;
+}
+body.delete-confirmation #content > ul a:hover,
+body.delete-confirmation #content > ul a:focus-visible {
+  color: var(--dl-ink);
+  text-decoration: underline wavy var(--dl-accent);
+  text-underline-offset: 3px;
+  outline: 0;
+}
+
+/* ---------- Botones ---------- */
+body.delete-confirmation #content form > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+}
+/* "Yes, I'm sure": acción destructiva → rojo marcador */
+body.delete-confirmation #content form input[type="submit"] {
+  margin: 0;
+  padding: 8px 26px;
+  font-family: "Kalam", cursive;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #fff;
+  background: var(--dl-accent);
+  border: 2px solid var(--dl-ink);
+  border-radius: var(--dl-wobble-a);
+  box-shadow: 3px 3px 0 0 var(--dl-ink);
+  filter: none;
+  cursor: pointer;
+  transition: transform .1s, box-shadow .1s, background .12s, color .12s;
+}
+/* "No, take me back": pegatina neutra */
+body.delete-confirmation #content form a.button.cancel-link:link,
+body.delete-confirmation #content form a.button.cancel-link:visited {
+  display: inline-block;
+  margin: 0;
+  padding: 8px 26px;
+  font-family: "Kalam", cursive;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: none;
+  letter-spacing: 0;
+  text-decoration: none;
+  color: var(--dl-ink);
+  background: var(--dl-hl);
+  border: 2px solid var(--dl-ink);
+  border-radius: var(--dl-wobble-c);
+  box-shadow: 3px 3px 0 0 var(--dl-ink);
+  filter: none;
+  cursor: pointer;
+  transition: transform .1s, box-shadow .1s, background .12s;
+}
+body.delete-confirmation #content form input[type="submit"]:hover,
+body.delete-confirmation #content form input[type="submit"]:focus-visible,
+body.delete-confirmation #content form a.button.cancel-link:hover,
+body.delete-confirmation #content form a.button.cancel-link:focus-visible {
+  transform: translate(2px, 2px) rotate(-1deg);
+  box-shadow: 1px 1px 0 0 var(--dl-ink);
+  filter: none;
+  outline: 0;
+}
+body.delete-confirmation #content form input[type="submit"]:hover,
+body.delete-confirmation #content form input[type="submit"]:focus-visible {
+  background: var(--dl-ink);
+  color: var(--dl-paper);
+}
+body.delete-confirmation #content form a.button.cancel-link:hover { background: var(--dl-hover); color: var(--dl-ink); }
+
+@media (max-width: 767px) {
+  body.delete-confirmation #content > p { padding: 12px 14px 12px 52px; }
+  body.delete-confirmation #content > ul { padding: 12px 14px 12px 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.delete-confirmation #content form input[type="submit"],
+  body.delete-confirmation #content form a.button { transition: none; }
+}
