@@ -26,6 +26,11 @@ dependencies = [
     "Django>=4.0"
 ]
 
+[project.urls]
+Homepage = "https://github.com/HectorLeal-HL/django-sketch-ui.git"
+Repository = "https://github.com/HectorLeal-HL/django-sketch-ui.git"
+Issues = "https://github.com/HectorLeal-HL/django-sketch-ui/issues"
+
 [tool.setuptools]
 packages = ["django_sketch_ui"]
 include-package-data = true
